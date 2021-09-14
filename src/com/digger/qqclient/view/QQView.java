@@ -18,7 +18,7 @@ public class QQView {
 
     private boolean loop = true;//控制菜单的循环显示
     private String key = "";//获取键盘输入
-    private UserClientService userClientService = new UserClientService();//用来与服务器验证登录、注册功能
+    private UserClientService userClientService = new UserClientService();//用来登录服务器、注册用户
     //显示主菜单
     public void mainView(){
 
