@@ -4,6 +4,7 @@ import com.digger.qqcommon.Message;
 import com.digger.qqcommon.MessageType;
 import com.digger.qqcommon.User;
 
+import java.awt.event.MouseWheelEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -69,5 +70,22 @@ public class UserClientService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //向服务器发送退出系统的消息
+    public void logout(){
+        Message message = new Message();
+        message.setSender(user.getId());
+        message.setMessageType(MessageType.MESSAGE_CLIENT_EXIT);
+        //发送给服务器
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(user.getId()).getSocket().getOutputStream());
+            oos.writeObject(message);
+            System.out.println(user.getId() + "退出了系统。。。。");
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
