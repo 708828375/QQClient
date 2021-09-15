@@ -60,6 +60,7 @@ public class UserClientService {
         //发送一个Message，类型为MESSAGE_GET_ONLINE_FRIEND
         Message message = new Message();
         message.setMessageType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+        message.setSender(user.getId());
         //发送给服务器
         try {
             //得到当前线程的socket对应的ObjectOutputStream对象
