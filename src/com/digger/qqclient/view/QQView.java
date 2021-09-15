@@ -34,7 +34,6 @@ public class QQView {
                     String UserID = Utility.readString(50);
                     System.out.print("输入你的密码：");
                     String pwd  = Utility.readString(50);
-                    //TODO 将用户信息发送到 服务器端进行验证
                     if(userClientService.checkUser(UserID,pwd)){//如果验证登录成功
                         System.out.println("用户(" +  UserID + ")登录成功");
                         while (loop){
@@ -48,6 +47,7 @@ public class QQView {
                             key = Utility.readString(1);
                             switch (key){
                                 case "1":
+                                    // TODO 写一个方法来获取在线用户列表
                                     System.out.println("显示在线用户列表");
                                     break;
                                 case "2":
