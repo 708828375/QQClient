@@ -19,24 +19,25 @@ public class QQView {
     private boolean loop = true;//控制菜单的循环显示
     private String key = "";//获取键盘输入
     private UserClientService userClientService = new UserClientService();//用来登录服务器、注册用户
-    //显示主菜单
-    public void mainView(){
 
-        while (loop){
+    //显示主菜单
+    public void mainView() {
+
+        while (loop) {
             System.out.println("===========欢迎登录网络通信系统============");
             System.out.println("\t\t1.登录系统");
             System.out.println("\t\t9.退出系统");
             System.out.print("请输入你的选择：");
             key = Utility.readString(1);
-            switch (key){
+            switch (key) {
                 case "1":
                     System.out.print("输入你的用户名：");
                     String UserID = Utility.readString(50);
                     System.out.print("输入你的密码：");
-                    String pwd  = Utility.readString(50);
-                    if(userClientService.checkUser(UserID,pwd)){//如果验证登录成功
-                        System.out.println("用户(" +  UserID + ")登录成功");
-                        while (loop){
+                    String pwd = Utility.readString(50);
+                    if (userClientService.checkUser(UserID, pwd)) {//如果验证登录成功
+                        System.out.println("用户(" + UserID + ")登录成功");
+                        while (loop) {
                             System.out.println("=========网络通信系统二级菜单(用户" + UserID + ")=========");
                             System.out.println("\t\t1.显示在线用户列表");
                             System.out.println("\t\t2.群发消息");
@@ -45,7 +46,7 @@ public class QQView {
                             System.out.println("\t\t9.退出系统");
                             System.out.print("请输入你的选择：");
                             key = Utility.readString(1);
-                            switch (key){
+                            switch (key) {
                                 case "1":
                                     System.out.println("\n显示在线用户列表");
                                     userClientService.onlineFriendList();
@@ -55,6 +56,11 @@ public class QQView {
                                     break;
                                 case "3":
                                     System.out.println("私聊消息");
+                                    System.out.print("请输入你要私聊的用户（在线）：");
+                                    String chatUserId = Utility.readString(10);
+                                    System.out.print(UserID + "请输入你的聊天内容：");
+                                    String content = Utility.readString(100);
+                                    userClientService.privateChat(chatUserId, content);
                                     break;
                                 case "4":
                                     System.out.println("发送文件");
@@ -66,7 +72,7 @@ public class QQView {
                                     break;
                             }
                         }
-                    }else{
+                    } else {
                         System.out.println("登录失败");
                     }
                     break;

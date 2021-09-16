@@ -88,4 +88,21 @@ public class UserClientService {
         }
 
     }
+
+    //私聊
+    public void privateChat(String getter, String content){
+        //封装一个message
+        Message message = new Message();
+        message.setMessageType(MessageType.MESSAGE_PRIVATE_CHAT);
+        message.setSender(user.getId());
+        message.setGetter(getter);
+        message.setContent(content);
+        try {
+            //将消息发给服务器
+            ObjectOutputStream oos = new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(user.getId()).getSocket().getOutputStream());
+            oos.writeObject(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
