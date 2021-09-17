@@ -56,6 +56,7 @@ public class QQView {
                                 case "2":
                                     System.out.print("请输入想对大家说的话：");
                                     String s = Utility.readString(100);
+                                    messageClientService.groupChat(UserID, s);
                                     break;
                                 case "3":
                                     System.out.println("私聊消息");
