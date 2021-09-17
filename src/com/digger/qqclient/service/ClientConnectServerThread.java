@@ -45,7 +45,7 @@ public class ClientConnectServerThread extends Thread {
                         System.out.println("用户： " + onlineUsers[i]);
                     }
                 }else if(MessageType.MESSAGE_PRIVATE_CHAT.equals(message.getMessageType())){//如果是用户私聊消息
-                    System.out.println(message.getSender() + "对" + message.getGetter() + "说：" + message.getContent());
+                    System.out.println("\n" + message.getSender() + "对" + message.getGetter() + "说：" + message.getContent());
                 }else {
                     System.out.println("是其他类型的message，暂时不处理。。。。");
                 }

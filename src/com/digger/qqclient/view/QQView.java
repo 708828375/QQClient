@@ -1,5 +1,6 @@
 package com.digger.qqclient.view;
 
+import com.digger.qqclient.service.MessageClientService;
 import com.digger.qqclient.service.UserClientService;
 import com.digger.qqclient.utils.Utility;
 
@@ -19,6 +20,7 @@ public class QQView {
     private boolean loop = true;//控制菜单的循环显示
     private String key = "";//获取键盘输入
     private UserClientService userClientService = new UserClientService();//用来登录服务器、注册用户
+    private MessageClientService messageClientService = new MessageClientService(); //用户私聊、群发消息
 
     //显示主菜单
     public void mainView() {
@@ -52,7 +54,8 @@ public class QQView {
                                     userClientService.onlineFriendList();
                                     break;
                                 case "2":
-                                    System.out.println("群发消息");
+                                    System.out.print("请输入想对大家说的话：");
+                                    String s = Utility.readString(100);
                                     break;
                                 case "3":
                                     System.out.println("私聊消息");
@@ -60,7 +63,8 @@ public class QQView {
                                     String chatUserId = Utility.readString(10);
                                     System.out.print(UserID + "请输入你的聊天内容：");
                                     String content = Utility.readString(100);
-                                    userClientService.privateChat(chatUserId, content);
+                                    System.out.println("\n" + UserID + "对" + chatUserId + "说：" + content);
+                                    messageClientService.privateChat(UserID, chatUserId, content);
                                     break;
                                 case "4":
                                     System.out.println("发送文件");

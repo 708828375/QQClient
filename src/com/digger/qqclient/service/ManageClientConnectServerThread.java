@@ -11,6 +11,15 @@ import java.util.HashMap;
 public class ManageClientConnectServerThread {
     //将多个线程放入到一个HashMap中，key:userId,value:线程
     private static HashMap<String,ClientConnectServerThread> hm = new HashMap<>();
+
+    public static HashMap<String, ClientConnectServerThread> getHm() {
+        return hm;
+    }
+
+    public static void setHm(HashMap<String, ClientConnectServerThread> hm) {
+        ManageClientConnectServerThread.hm = hm;
+    }
+
     //将线程加入到HashMap中
     public static void addClientConnectServerThread(String userId,ClientConnectServerThread clientConnectServerThread){
         hm.put(userId,clientConnectServerThread);
