@@ -49,8 +49,6 @@ public class FileClientServer {
                 }
             }
         }
-        System.out.println("\n" + senderId + "给" + getterId + "发送文件：" + src + "到对方的电脑目录：" + dst);
-
         //发送
         try {
             ObjectOutputStream oos = new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(senderId).getSocket().getOutputStream());
@@ -58,5 +56,6 @@ public class FileClientServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("\n" + senderId + "给" + getterId + "发送文件：" + src + "到对方的电脑目录：" + dst);
     }
 }

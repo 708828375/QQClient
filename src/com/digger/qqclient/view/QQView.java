@@ -1,8 +1,12 @@
 package com.digger.qqclient.view;
 
+import com.digger.qqclient.service.FileClientServer;
 import com.digger.qqclient.service.MessageClientService;
 import com.digger.qqclient.service.UserClientService;
 import com.digger.qqclient.utils.Utility;
+import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+
+import java.io.FileInputStream;
 
 /**
  * @Description : 客户端菜单界面
@@ -21,6 +25,7 @@ public class QQView {
     private String key = "";//获取键盘输入
     private UserClientService userClientService = new UserClientService();//用来登录服务器、注册用户
     private MessageClientService messageClientService = new MessageClientService(); //用户私聊、群发消息
+    private FileClientServer fileClientServer = new FileClientServer();// 用户发送文件
 
     //显示主菜单
     public void mainView() {
@@ -59,7 +64,6 @@ public class QQView {
                                     messageClientService.groupChat(UserID, s);
                                     break;
                                 case "3":
-                                    System.out.println("私聊消息");
                                     System.out.print("请输入你要私聊的用户（在线）：");
                                     String chatUserId = Utility.readString(10);
                                     System.out.print(UserID + "请输入你的聊天内容：");
@@ -68,7 +72,13 @@ public class QQView {
                                     messageClientService.privateChat(UserID, chatUserId, content);
                                     break;
                                 case "4":
-                                    System.out.println("发送文件");
+                                    System.out.print("请输入你要发送的用户(在线)：");
+                                    String getter = Utility.readString(10);
+                                    System.out.print("请输入你要发送的文件：");
+                                    String src = Utility.readString(50);
+                                    System.out.print("请输入你要将文件发送到的位置：");
+                                    String dst = Utility.readString(50);
+                                    fileClientServer.sendFileToOne(src, dst, UserID, getter);
                                     break;
                                 case "9":
                                     //无异常退出系统

@@ -4,6 +4,9 @@ import com.digger.qqcommon.Message;
 import com.digger.qqcommon.MessageType;
 import com.sun.corba.se.impl.orbutil.ObjectStreamClassUtil_1_3;
 
+import javax.sound.midi.Soundbank;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
@@ -48,7 +51,15 @@ public class ClientConnectServerThread extends Thread {
                     System.out.println("\n" + message.getSender() + "对" + message.getGetter() + "说：" + message.getContent());
                 }else if(MessageType.MESSAGE_GROUP_CHAT.equals(message.getMessageType())){//如果收到的是群发消息
                     System.out.println(message.getSender() + "对大家说：" + message.getContent());
-                }else {
+                }else if(MessageType.MESSAGE_FILE_MES.equals(message.getMessageType())){//如果收到的是文件消息
+                    //接收文件，将文件存入指定路径
+                    System.out.println("\n" + message.getSender() + "给" + message.getGetter() + "发送文件:" + message.getSrc() + "到我的电脑：" + message.getDst());
+                    //取出message的文件字节数组，通过文件输出流写出到一个磁盘
+                    FileOutputStream fileOutputStream = new FileOutputStream(message.getDst());
+                    fileOutputStream.write(message.getFileBytes());
+                    fileOutputStream.close();
+                    System.out.println("\n 保存文件成功~");
+                }else{
                     System.out.println("是其他类型的message，暂时不处理。。。。");
                 }
             } catch (Exception e) {
